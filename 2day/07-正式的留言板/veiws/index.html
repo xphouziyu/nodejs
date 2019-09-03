@@ -1,0 +1,32 @@
+<!-- 在 vscode 中 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+    <title>格言板</title>
+    <link rel="stylesheet" href="/public/css/bootstrap.css">
+</head>
+
+<body>
+    <!-- 这个是主页 -->
+    <div class="header container">
+        <div class="page-header">
+            <h1>留下最喜欢的格言</h1>
+            <a class="btn btn-success" href="/post">发格言</a>
+        </div>
+    </div>
+    <div class="comments container">
+        <ul class="list-group">
+            {{ each lists }}
+            <li class="list-group-item">{{ $value.name }}说：{{ $value.message }} <span class="pull-right">{{ $value.dataTime }}</span></li>
+            {{ /each }}
+        </ul>
+    </div>
+
+
+</body>
+
+</html>
