@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>工单主页</title>
+</head>
+<body>
+    <div>
+        <table border="1">
+            <tr>
+                <th>保修日期</th>
+                <th>客户姓名</th>
+                <th>联系电话</th>
+                <th>机器型号</th>
+                <th>故障情况</th>
+                <th>维修人员</th>
+                <th>是否上门</th>
+                <th>维修情况</th>
+            </tr>
+            <tr>
+                {{ each loglist }}
+                <td> {{ $value.date }} </td>
+                <td> {{ $value.name }} </td>
+                <td> {{ $value.phone }} </td>
+                <td> {{ $value.model }} </td>
+                <td> {{ $value.situation}} </td>
+                <td> {{ $value.staff}} </td>
+                <td> {{ $value.yesok}} </td>
+                <td> {{ $value.maintain}} </td>
+                {{ /each }}
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
