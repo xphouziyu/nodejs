@@ -2,6 +2,7 @@
 const express = require("express")
 const app = express()
 const router = require("./route")
+const bodyParser = require('body-parser')
 
 // 要想使用 art-template 需要使用 express-art-template
 app.engine('html', require("express-art-template"))

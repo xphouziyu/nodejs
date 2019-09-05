@@ -32,6 +32,17 @@ router.get("/", function(req, res) {
     res.render("index.html", {loglist: loglist})
 })
 
+// 添加新信息
+router.get("/add", function(req, res) {
+    res.render("add.html")
+})
+// express 本身没有 post 解析能力，需要使用中间件 body-parser ，想下载模块
+// 在 app.js 中导入 body-parser 模块
+router.post("/add", function(req, res) {
+    console.log(req.body)
+    res.redirect("/")
+})
+
 // 从挂载容器到这里以上的部分就是挂载的内容
 // 导出挂载的方法体
 module.exports = router
