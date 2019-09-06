@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>添加属性</title>
+</head>
+<body>
+    <div>
+        <button><a href="/">回到主页</a></button>
+    </div>
+    <form action="/updata" method="POST">
+        <div>
+            <label for="s1">保修日期</label>
+            <input id="s1" name="date" type="text" value="{{loglist.date}}">
+        </div>
+        <div>
+            <label for="s2">客户姓名</label>
+            <input id="s2" name="name" type="text" value="{{loglist.name}}" >
+        </div>
+        <div>
+            <label for="s3">联系电话</label>
+            <input  id="s3" name="phone" type="text" value="{{loglist.phone}}">
+        </div>
+        <div>
+            <label for="s4">机器型号</label>
+            <input id="s4" name="model" type="text" value="{{loglist.model}}">
+        </div>
+        <div>
+            <label for="s5">故障情况</label>
+            <input  id="s5" name="situation" type="text" value="{{loglist.situation}}">
+        </div>
+        <div>
+            <label for="s6">维修人员</label>
+            <input id="s6" name="staff" type="text" value="{{loglist.staff}}">
+        </div>
+        <div>
+            <label for="s7">是否上门</label>
+            <input id="s7" name="yesok" type="text" value="{{loglist.yesok}}">
+        </div>
+        <div>
+            <label for="s8">维修情况</label>
+            <input id="s8" name="maintain" type="text" value="{{loglist.maintain}}">
+        </div>
+        <div>
+            <input type="submit" value="提交">
+        </div>
+    </form>
+</body>
+</html>

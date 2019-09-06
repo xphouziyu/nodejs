@@ -34,11 +34,11 @@ var router = express.Router()
     这个是主页配置
 */
 router.get("/", function(req, res) {
-    Table.find(function(err, data) {
+    Table.find(function(err, loglist) {
         if (err) {
-            return res.status(500).send("数据丢失")
+            return res.send("数据丢失")
         }
-        res.render('index.html',{loglist:data})
+        res.render('index.html',{loglist: loglist})
     })
 
 
@@ -55,7 +55,6 @@ router.get("/", function(req, res) {
     //     res.render("index.html", {loglist: loglist})
     //     console.log(loglist)
     // })
-
 })
 
 
@@ -70,21 +69,48 @@ router.get("/add", function(req, res) {
 // 在 app.js 中导入 body-parser 模块
 router.post("/add", function(req, res) {
     // console.log(req.body)
+    Table.add(req.body, function(err) {
+        if (err) {
+            return res.send("添加失败！")
+        }
+        res.redirect("/")
+    })
+    // console.log(req.body)
     // 现在先要将数据写入到内存变量中
 
     // loglist.unshift(req.body)
     // 先要读取文件到内存，然后添加内容，然后再次写入到文件中。
-    fs.readFile('./db.json','utf-8',function(err,data){
-        if (err) {
-            return res.send("文件不存在")
-        }
-        var loglist = JSON.parse(data).loglist
-    })
-
-
-    res.redirect("/")
+    // fs.readFile('./db.json','utf-8',function(err,data){
+    //     if (err) {
+    //         return res.send("文件不存在")
+    //     }
+    //     var loglist = JSON.parse(data).loglist
+    // })
+    // res.redirect("/")
 })
 
 // 从挂载容器到这里以上的部分就是挂载的内容
 // 导出挂载的方法体
+
+/*
+    删除指定表单
+*/
+router.get("/delete", function(req, res) {
+    Table.delete(req.query.id, function(err) {
+        if (err) {
+            return res.send("删除失败")
+        }
+        res.redirect("/")
+    })
+})
+
+
+/*
+    修改表单
+*/
+// 首先要获得要修改的数据
+router.get("edit.html", function(req, res) {
+    
+})
+
 module.exports = router

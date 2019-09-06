@@ -1,15 +1,15 @@
 {
-    "loglist" : 
-        [
-            {
-            "date": "2019.09.05",
-            "name": "看守所",
-            "phone": "123456",
-            "model": "电脑",
-            "situation":"主机死机",
-            "staff": "老哥",
-            "yesok": "1",
-            "maintain": "修好了"
-            }
-        ]
+    "loglist": [
+        {
+            "date": "20190907",
+            "name": "老张",
+            "phone": "7012345",
+            "model": "1025",
+            "situation": "五",
+            "staff": "老张",
+            "yesok": "否",
+            "maintain": "修不好立刻",
+            "id": 2
+        }
+    ]
 }

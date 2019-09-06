@@ -22,6 +22,7 @@
                 <th>维修人员</th>
                 <th>是否上门</th>
                 <th>维修情况</th>
+                <th>操作设置</th>
             </tr>
             {{ each loglist }}
             <tr>
@@ -33,6 +34,11 @@
                 <td> {{ $value.staff}} </td>
                 <td> {{ $value.yesok}} </td>
                 <td> {{ $value.maintain}} </td>
+                <td>
+                    <button><a href="/edit?id={{ $value.id }}">编辑</a></button>
+                    <button><a href="/delete?id={{ $value.id }}">删除</a></button>
+                </td>
+
             </tr>
             {{ /each }}
         </table>
