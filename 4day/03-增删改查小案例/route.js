@@ -27,16 +27,23 @@ const fs = require("fs")
 // ]
 // 为了保证模块化，和数据的持久保存，所以专门创建了一个文本数据 db.json
 
+
 // 这个项目主要是体现增删改查
 // 这里就直接显示工单把
 router.get("/", function(req, res) {
     // res.send("hello world")
     // res.render("index.html", {loglist: loglist})
     // 接下来要实现到 db.json 中读取信息。
-    fs.readFile("./db.json", function(err, data) {
+    fs.readFile("./db.json", "utf-8", function(err, data) {
         if (err) {
-            return res.send("找不到数据")
+            // console.log(err)
+            // 我再一次因为启动 node 的目录不对而造成相对路径不对的问题
+            return res.send("找不到文件") 
         }
+        var loglist = JSON.parse(data).loglist
+        res.render("index.html", {loglist: loglist})
+        console.log(loglist)
+        
     })
 
 })
