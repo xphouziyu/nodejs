@@ -4,13 +4,12 @@
 
 // module.exports = route
 // 很不幸的，我错了，下面是正确的写法
-
+const Table = require("./tables")
 // 首先先挂在一个 route 的容器， 但是这个容器是 express 封装的，所以要添加模块。
 const express = require("express")
+
 var router = express.Router()
 
-// 为了读取文件
-const fs = require("fs")
 // 要想使用 art-template 需要使用 express-art-template
 // 在 app.js 中添加 模块
 // var loglist = [
@@ -30,24 +29,39 @@ const fs = require("fs")
 
 // 这个项目主要是体现增删改查
 // 这里就直接显示工单把
+
+/*
+    这个是主页配置
+*/
 router.get("/", function(req, res) {
+    Table.find(function(err, data) {
+        if (err) {
+            return res.status(500).send("数据丢失")
+        }
+        res.render('index.html',{loglist:data})
+    })
+
+
     // res.send("hello world")
     // res.render("index.html", {loglist: loglist})
     // 接下来要实现到 db.json 中读取信息。
-    fs.readFile("./db.json", "utf-8", function(err, data) {
-        if (err) {
-            // console.log(err)
-            // 我再一次因为启动 node 的目录不对而造成相对路径不对的问题
-            return res.send("找不到文件") 
-        }
-        var loglist = JSON.parse(data).loglist
-        res.render("index.html", {loglist: loglist})
-        console.log(loglist)
-        
-    })
+    // fs.readFile("./db.json", "utf-8", function(err, data) {
+    //     if (err) {
+    //         // console.log(err)
+    //         // 我再一次因为启动 node 的目录不对而造成相对路径不对的问题
+    //         return res.send("找不到文件") 
+    //     }
+    //     var loglist = JSON.parse(data).loglist
+    //     res.render("index.html", {loglist: loglist})
+    //     console.log(loglist)
+    // })
 
 })
 
+
+/*
+    这里处理新添加的信息
+*/
 // 添加新信息
 router.get("/add", function(req, res) {
     res.render("add.html")
@@ -59,6 +73,13 @@ router.post("/add", function(req, res) {
     // 现在先要将数据写入到内存变量中
 
     // loglist.unshift(req.body)
+    // 先要读取文件到内存，然后添加内容，然后再次写入到文件中。
+    fs.readFile('./db.json','utf-8',function(err,data){
+        if (err) {
+            return res.send("文件不存在")
+        }
+        var loglist = JSON.parse(data).loglist
+    })
 
 
     res.redirect("/")
