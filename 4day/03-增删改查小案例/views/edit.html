@@ -10,7 +10,7 @@
     <div>
         <button><a href="/">回到主页</a></button>
     </div>
-    <form action="/updata" method="POST">
+    <form action="/edit" method="POST">
         <div>
             <label for="s1">保修日期</label>
             <input id="s1" name="date" type="text" value="{{loglist.date}}">
@@ -42,6 +42,9 @@
         <div>
             <label for="s8">维修情况</label>
             <input id="s8" name="maintain" type="text" value="{{loglist.maintain}}">
+        </div>
+        <div>
+            <input name="id" type="hidden" value="{{loglist.id}}">
         </div>
         <div>
             <input type="submit" value="提交">

@@ -6,13 +6,15 @@ const fs = require("fs")
 // 定义路径常量
 const dbPath = "./db.json"
 
+
+
 // 获取表单信息
-exports.find = function(callback){
+exports.show = function(callback){
     fs.readFile(dbPath,'utf-8', function(err, data) {
         if (err) {
             return callback(err)
         }
-        callback(null, JSON.parse(data).loglist)
+        callback(null, JSON.parse(data).loglists)
     })
 }
 
@@ -23,7 +25,7 @@ exports.add = function( loglist, callback){
         if (err) {
             return callback(err)
         }
-        var loglists = JSON.parse(data).loglist
+        var loglists = JSON.parse(data).loglists
 
         // 添加id
         loglist.id = loglists[loglists.length - 1].id + 1
@@ -32,7 +34,7 @@ exports.add = function( loglist, callback){
         // console.log(loglist)
         // 将数组转化为字符串
         var fileData = JSON.stringify({
-            loglist: loglists
+            loglists: loglists
         })
 
         // 把字符串保存该的文件中
@@ -45,18 +47,13 @@ exports.add = function( loglist, callback){
     })
 }
 
-// 更新表单信息
-exports.updata = function(){
-    
-}
-
 // 删除表单信息
 exports.delete = function(byId, callback){
     fs.readFile(dbPath, "utf-8", function(err, data) {
         if (err) {
             return callback(err)
         }
-        var loglists = JSON.parse(data).loglist
+        var loglists = JSON.parse(data).loglists
 
         // 用 es6 的语法 findIndex 方法找到要删除的下标
         var deleteId = loglists.findIndex(function (item) {
@@ -67,7 +64,7 @@ exports.delete = function(byId, callback){
         loglists.splice(deleteId, 1)
 
         var fileData = JSON.stringify({
-            loglist: loglists
+            loglists: loglists
         })
 
         // 保存数据
@@ -78,5 +75,56 @@ exports.delete = function(byId, callback){
             callback(null)
         })
 
+    })
+}
+
+// 通过id 查找指定数组对象
+exports.find = function(byId, callback) {
+    fs.readFile(dbPath, "utf-8", function(err, data) {
+        if (err) {
+            return callback(err)
+        }
+        var loglists = JSON.parse(data).loglists
+
+        var ret = loglists.find(function (item) {
+            return item.id === parseInt(byId)
+        })
+    
+        callback(null, ret)
+    })
+}
+// 保存修改好的数据
+exports.edit = function(loglist, callback) {
+    fs.readFile(dbPath, "utf-8", function(err, data) {
+        if (err) {
+            return callback(err)
+        }
+        var loglists = JSON.parse(data).loglists
+        // 将字符串装换成字符
+        console.log(loglist)
+        loglist.id = parseInt(loglist.id)
+        
+
+        var list = loglists.find(function (item) {
+            return item.id == loglist.id
+        })
+
+
+        // 遍历拷贝对象
+        for (var key in loglist) {
+            list[key] = loglist[key]
+        }
+
+        var fileData = JSON.stringify({
+            loglists: loglists
+        })
+
+        // 保存信息
+        fs.writeFile(dbPath, fileData, function (err) {
+            if (err) {
+                return callback(err)
+            }
+            callback(null)
+        })
     })
 }

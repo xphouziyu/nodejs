@@ -34,7 +34,7 @@ var router = express.Router()
     这个是主页配置
 */
 router.get("/", function(req, res) {
-    Table.find(function(err, loglist) {
+    Table.show(function(err, loglist) {
         if (err) {
             return res.send("数据丢失")
         }
@@ -109,8 +109,24 @@ router.get("/delete", function(req, res) {
     修改表单
 */
 // 首先要获得要修改的数据
-router.get("edit.html", function(req, res) {
-    
+router.get("/edit", function(req, res) {
+    // console.log(req.query.id)
+    Table.find( parseInt(req.query.id), function(err, loglist) {
+        if (err) {
+            return res.send("没有指定ID")
+        }
+        // console.log(loglist)
+        res.render("edit.html", {loglist: loglist})
+    })
 })
 
+router.post("/edit", function(req, res) {
+    Table.edit(req.body, function(err) {
+        if (err) {
+            return res.send("修改失败")
+        }
+        res.redirect("/")
+    })
+   
+})
 module.exports = router

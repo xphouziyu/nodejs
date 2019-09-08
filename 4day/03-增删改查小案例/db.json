@@ -1,15 +1,1 @@
-{
-    "loglist": [
-        {
-            "date": "20190907",
-            "name": "老张",
-            "phone": "7012345",
-            "model": "1025",
-            "situation": "五",
-            "staff": "老张",
-            "yesok": "否",
-            "maintain": "修不好立刻",
-            "id": 2
-        }
-    ]
-}
+{"loglists":[{"date":"20190907","name":"老张","phone":"7012345","model":"1025","situation":"五","staff":"老张","yesok":"否","maintain":"修不好立刻","id":2},{"date":"","name":"","phone":"","model":"","situation":"电脑死机，打印机嗝屁","staff":"","yesok":"否是","maintain":"","id":5},{"date":"2019","name":"老张","phone":"7012345","model":"1025","situation":"电脑死机，打印机嗝屁","staff":"老张","yesok":"否","maintain":"修不好立刻","id":6}]}
