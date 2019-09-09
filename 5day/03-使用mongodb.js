@@ -15,15 +15,51 @@ mongoose.connect("mongodb://localhost/nodejs", { useNewUrlParser: true })
 mongoose.Promise = global.Promise
 
 // 创建一个叫 cat 的集合
-var Cat = mongoose.model('Cat',{ name: String})
+var Cat = mongoose.model('Cat', { name: String, age: Intl })
 
-// 创建一个叫 新对象
-var Kalis = new Cat({name: "老毛1",age: 10 })
+// for (var x = 1; x < 100; x++) {
+//     // 创建一个叫 新对象
+//     var Kalis = new Cat({ name: "老毛"+x , age:(x*2-1) })
 
-// 持久化保存
-Kalis.save(function(err) {
+//     // 持久化保存
+//     Kalis.save(function (err) {
+//         if (err) {
+//             return console.log("保存失败")
+//         }
+//         console.log("保存成功")
+//     })
+// }
+
+// 只查询符合的第一个
+// Cat.findOne({name:"老毛"},function(err, ret) {
+//     if (err) {
+//         console.log(500)
+//     }else{
+//         console.log(ret)
+//     }
+// })
+
+// 删除数据
+// Cat.deleteMany({ "name" : "老毛" }, function(err, ret) {
+//     if (err) {
+//         console.log(500)
+//     }else{
+//         console.log(200)
+//     }
+// })
+// Cat.find({ "name" : "老毛"} ,function(err, ret) {
+//     if (err) {
+//         console.log(500)
+//     }else{
+//         console.log(ret)
+//     }
+// })
+
+// 修改数据
+Cat.update({ name: "老毛5" }, { age: 100 }, function (err, ret) {
     if (err) {
-        return console.log("保存失败")
+        console.log(500)
+    } else {
+        console.log(ret)
     }
-    console.log("保存成功")
 })
